@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Juegos</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin-bottom: 40px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .game-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .game-card h2 {
+            font-size: 1.4em;
+            margin: 15px 0 10px;
+            color: #333;
+        }
+
+        .game-card p {
+            font-size: 0.95em;
+            color: #666;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .game-card button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .game-card button:hover {
+            background-color: #0056b3;
+        }
+
+        #iframe-container {
+            display: none; /* Oculto inicialmente */
+            margin-top: 40px;
+            width: 100%;
+            height: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 15px;
+        }
+
+        /* Estilos para el mensaje de cargando */
+        #loading-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Reserva tu Actividad</h1>
+
+    <div class="container">
+        <div class="game-card">
+            <img src="https://sportmaster.mx/wp-content/uploads/como-se-divide-la-cancha-de-futbol.jpg" alt="Canchita A">
+            <h2>⚽ Canchita A - Fútbol / Vóley</h2>
+            <p>¡Reserva la canchita de fútbol y disfruta de un partido emocionante con tus amigos! Diversión y deporte asegurados. ⚽🤸🤼‍♂️</p>
+            <button onclick="loadIframe('A')">Reservar</button>
+        </div>
+        
+        <div class="game-card">
+            <img src="https://sportmaster.mx/wp-content/uploads/como-se-divide-la-cancha-de-futbol.jpg" alt="Canchita B">
+            <h2>⚽ Canchita B - Fútbol / Vóley</h2>
+            <p>¡Reserva la canchita de fútbol y disfruta de un partido emocionante con tus amigos! Diversión y deporte asegurados. ⚽🤸🤼‍♂️</p>
+            <button onclick="loadIframe('B')">Reservar</button>
+        </div>
+        
+        <div class="game-card">
+            <img src="https://www.juegosmartinakids.cl/imagenes/juegos/imagen-ID-06066474.jpg" alt="Taka Taka">
+            <h2>⚽️🕹️ Taka Taka</h2>
+            <p>¡Reserva tu turno para el emocionante juego del taka taka! ⚽️🕹️ Desafía a tus amigos, controla los jugadores y anota goles en este clásico de fútbol de mesa. 🎯🥅 ¡Diversión y competencia garantizada! 🎉</p>
+            <button onclick="loadIframe('Taka')">Reservar</button>
+        </div>
+        
+        <div class="game-card">
+            <img src="https://www.utadeo.edu.co/sites/tadeo/files/styles/internal_517x290/public/node/event/field_images/juego-de-sapo-con-monedas-de-bronce-directo-de-fabrica-d_nq_np_199401-mla20328654123_062015-f.jpg?itok=JLcCtudm" alt="Juego de Sapito">
+            <h2>🐸 Juego de Sapito</h2>
+            <p>¡Reserva tu turno para el clásico juego del sapito! 🎯🐸 Desafía a tus amigos, lanza las monedas y suma puntos en esta divertida competencia. 🪙🎉 ¡Diversión asegurada para todos! 😄</p>
+            <button onclick="loadIframe('Sapito')">Reservar</button>
+        </div>
+    </div>
+
+    <div id="iframe-container">
+        <!-- Aquí se cargará el iframe según la selección -->
+    </div>
+
+    <!-- Mensaje flotante de cargando -->
+    <div id="loading-message">Cargando...</div>
+
+    <script>
+        function loadIframe(game) {
+            let iframeContainer = document.getElementById('iframe-container');
+            let iframeSrc = '';
+            let loadingMessage = document.getElementById('loading-message');
+
+            // Mostrar mensaje de cargando
+            loadingMessage.style.display = 'block';
+
+            // Hacer visible el contenedor del iframe
+            iframeContainer.style.display = 'block';
+
+            switch (game) {
+                case 'A':
+                    iframeSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0DOpnQrLWB_LBJBPYSU6ttDGXVEvJn5AFl6DrIRMTMauZu4H-ks0M_Xfch8Lyn34HUalfZ0Ucm?gv=true';
+                    break;
+                case 'B':
+                    iframeSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0uYkyuPxpcktNikY-Z7mYasjTqanWGWptbS_OdErOCJ6ib3rf6UtRq2L8k1XsDjxSnJzKIPOEa?gv=true';
+                    break;
+                case 'Taka':
+                    iframeSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1iySGhwvFWIkYX-Lmgof7rz_kVlKp7te7XNsj6pDoWspuI5M4Hju2Iq99zjj4GOaLkQoZWjvJI?gv=true';
+                    break;
+                case 'Sapito':
+                    iframeSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3IUjsFB9k3JRs9PC5cQlby9e2AG1wYU_Hlfcvk2AV8s2RQ_0IZcbhco0p0khBgpPmqqyC1jPQ0?gv=true';
+                    break;
+            }
+            
+            // Cargar el iframe
+            iframeContainer.innerHTML = `<iframe src="${iframeSrc}" frameborder="0"></iframe>`;
+
+            // Ocultar mensaje de cargando una vez que el iframe se ha cargado
+            let iframe = iframeContainer.querySelector('iframe');
+            iframe.onload = function() {
+                loadingMessage.style.display = 'none';
+                // Desplazarse automáticamente a la sección del iframe
+                iframe.scrollIntoView({ behavior: 'smooth' });
+            };
+        }
+    </script>
+
+</body>
+</html>
