@@ -15,7 +15,7 @@
         }
 
         .header-container {
-            background-color: #0056b3; /* Fondo azul */
+            background-color: #673AB6; /* Fondo azul */
             border-radius: 15px;
             padding: 20px;
             text-align: center;
@@ -184,7 +184,7 @@
 
         <div class="game-card" role="button" tabindex="0" aria-label="Reservar Taka Taka" onclick="loadIframe('Taka')" onkeypress="if(event.key === 'Enter') loadIframe('Taka')">
             <img src="https://www.juegosmartinakids.cl/imagenes/juegos/imagen-ID-06066474.jpg" alt="Taka Taka">
-            <h2>⚽️🕹️ Taka Taka</h2>
+            <h2>⚽️🕹️ Taka Taka (no disponible)</h2>
             <p>¡Reserva tu turno para el emocionante juego del taka taka! 🎯 Desafía a tus amigos en este clásico de fútbol de mesa. 🥳</p>
             <button onclick="loadIframe('Taka')">Reservar</button>
         </div>
@@ -213,14 +213,26 @@
     <script>
         function loadIframe(game) {
             let iframeContainer = document.getElementById('iframe-container');
-            let iframeSrc = '';
             let loadingMessage = document.getElementById('loading-message');
+
+            // Hacer visible el contenedor del iframe
+            iframeContainer.style.display = 'block';
+
+            if (game === 'Taka') {
+                // Mostrar un mensaje de alerta para el juego Taka Taka
+                Swal.fire({
+                    title: 'No disponible temporalmente',
+                    text: 'El juego Taka Taka está en mantenimiento. Por favor, inténtalo más tarde.',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+                return; // No cargamos el iframe
+            }
 
             // Mostrar mensaje de cargando
             loadingMessage.style.display = 'block';
 
-            // Hacer visible el contenedor del iframe
-            iframeContainer.style.display = 'block';
+            let iframeSrc = '';
 
             switch (game) {
                 case 'A':
@@ -229,14 +241,11 @@
                 case 'B':
                     iframeSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0uYkyuPxpcktNikY-Z7mYasjTqanWGWptbS_OdErOCJ6ib3rf6UtRq2L8k1XsDjxSnJzKIPOEa?gv=true';
                     break;
-                case 'Taka':
-                    iframeSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1iySGhwvFWIkYX-Lmgof7rz_kVlKp7te7XNsj6pDoWspuI5M4Hju2Iq99zjj4GOaLkQoZWjvJI?gv=true';
-                    break;
                 case 'Sapito':
                     iframeSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3IUjsFB9k3JRs9PC5cQlby9e2AG1wYU_Hlfcvk2AV8s2RQ_0IZcbhco0p0khBgpPmqqyC1jPQ0?gv=true';
                     break;
             }
-            
+
             // Cargar el iframe
             iframeContainer.innerHTML = `<iframe src="${iframeSrc}" frameborder="0"></iframe>`;
 
