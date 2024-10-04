@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva de Actividades Recreativas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -110,6 +111,24 @@
             z-index: 9999;
         }
 
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        footer a {
+            color: #0056b3;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
         /* Media queries para hacer el diseño responsive */
         @media (max-width: 600px) {
             h1 {
@@ -174,6 +193,12 @@
     <!-- Mensaje flotante de cargando -->
     <div id="loading-message" role="alert">Cargando...</div>
 
+    <!-- Footer con Copyright -->
+    <footer onclick="showInfo()">
+        <p>&copy; 2024 Derechos Reservados. Desarrollado por Ejecutivo Analítica de JVN.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function loadIframe(game) {
             let iframeContainer = document.getElementById('iframe-container');
@@ -211,6 +236,16 @@
                 // Desplazarse automáticamente a la sección del iframe
                 iframe.scrollIntoView({ behavior: 'smooth' });
             };
+        }
+
+        function showInfo() {
+            Swal.fire({
+                title: 'Información de Contacto',
+                text: 'Creado por Anthony Richard Robles Flores',
+                icon: 'info',
+                confirmButtonText: 'Contactar por WhatsApp',
+                footer: '<a href="https://wa.me/930372814" target="_blank">Enviar WhatsApp</a>'
+            });
         }
     </script>
 
