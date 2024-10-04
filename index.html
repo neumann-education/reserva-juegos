@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserva de Juegos</title>
+    <title>Reserva de Actividades Recreativas</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -17,6 +17,7 @@
             text-align: center;
             color: #0056b3;
             margin-bottom: 40px;
+            font-size: 2em;
         }
 
         .container {
@@ -33,6 +34,7 @@
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
+            padding: 15px;
         }
 
         .game-card:hover {
@@ -42,8 +44,8 @@
 
         .game-card img {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
+            height: 200px; /* Tamaño fijo para todas las imágenes */
+            object-fit: cover; /* Asegura que las imágenes mantengan su proporción */
         }
 
         .game-card h2 {
@@ -107,48 +109,70 @@
             font-size: 1.2em;
             z-index: 9999;
         }
+
+        /* Media queries para hacer el diseño responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em; /* Tamaño de fuente más pequeño en móviles */
+            }
+
+            .game-card h2 {
+                font-size: 1.2em; /* Tamaño de fuente más pequeño para el título */
+            }
+
+            .game-card p {
+                font-size: 0.85em; /* Texto un poco más pequeño */
+            }
+
+            .game-card button {
+                font-size: 0.9em; /* Botón más pequeño en móviles */
+                padding: 10px 15px; /* Ajustar el padding */
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1> Reserva de Actividades Recreativas </h1>
+    <header>
+        <h1>Reserva de Actividades Recreativas</h1>
+    </header>
 
-    <div class="container">
-        <div class="game-card">
-            <img src="https://sportmaster.mx/wp-content/uploads/como-se-divide-la-cancha-de-futbol.jpg" alt="Canchita A">
+    <main class="container">
+        <div class="game-card" role="button" tabindex="0" aria-label="Reservar Canchita A - Fútbol / Vóley" onclick="loadIframe('A')" onkeypress="if(event.key === 'Enter') loadIframe('A')">
+            <img src="https://sportmaster.mx/wp-content/uploads/como-se-divide-la-cancha-de-futbol.jpg" alt="Canchita A - Fútbol y Vóley">
             <h2>⚽ Canchita A - Fútbol / Vóley</h2>
-            <p>¡Reserva la canchita de fútbol y disfruta de un partido emocionante con tus amigos! Diversión y deporte asegurados. ⚽🤸🤼‍♂️</p>
+            <p>¡Reserva la canchita y disfruta de un partido emocionante con amigos! 🎉 Diversión y deporte asegurados para todos. 🥳</p>
             <button onclick="loadIframe('A')">Reservar</button>
         </div>
-        
-        <div class="game-card">
-            <img src="https://sportmaster.mx/wp-content/uploads/como-se-divide-la-cancha-de-futbol.jpg" alt="Canchita B">
+
+        <div class="game-card" role="button" tabindex="0" aria-label="Reservar Canchita B - Fútbol / Vóley" onclick="loadIframe('B')" onkeypress="if(event.key === 'Enter') loadIframe('B')">
+            <img src="https://sportmaster.mx/wp-content/uploads/como-se-divide-la-cancha-de-futbol.jpg" alt="Canchita B - Fútbol y Vóley">
             <h2>⚽ Canchita B - Fútbol / Vóley</h2>
-            <p>¡Reserva la canchita de fútbol y disfruta de un partido emocionante con tus amigos! Diversión y deporte asegurados. ⚽🤸🤼‍♂️</p>
+            <p>¡Reserva la canchita y disfruta de un partido emocionante con amigos! 🎉 Diversión y deporte asegurados para todos. 🥳</p>
             <button onclick="loadIframe('B')">Reservar</button>
         </div>
-        
-        <div class="game-card">
+
+        <div class="game-card" role="button" tabindex="0" aria-label="Reservar Taka Taka" onclick="loadIframe('Taka')" onkeypress="if(event.key === 'Enter') loadIframe('Taka')">
             <img src="https://www.juegosmartinakids.cl/imagenes/juegos/imagen-ID-06066474.jpg" alt="Taka Taka">
             <h2>⚽️🕹️ Taka Taka</h2>
-            <p>¡Reserva tu turno para el emocionante juego del taka taka! ⚽️🕹️ Desafía a tus amigos, controla los jugadores y anota goles en este clásico de fútbol de mesa. 🎯🥅 ¡Diversión y competencia garantizada! 🎉</p>
+            <p>¡Reserva tu turno para el emocionante juego del taka taka! 🎯 Desafía a tus amigos en este clásico de fútbol de mesa. 🥳</p>
             <button onclick="loadIframe('Taka')">Reservar</button>
         </div>
-        
-        <div class="game-card">
+
+        <div class="game-card" role="button" tabindex="0" aria-label="Reservar Juego de Sapito" onclick="loadIframe('Sapito')" onkeypress="if(event.key === 'Enter') loadIframe('Sapito')">
             <img src="https://www.utadeo.edu.co/sites/tadeo/files/styles/internal_517x290/public/node/event/field_images/juego-de-sapo-con-monedas-de-bronce-directo-de-fabrica-d_nq_np_199401-mla20328654123_062015-f.jpg?itok=JLcCtudm" alt="Juego de Sapito">
             <h2>🐸 Juego de Sapito</h2>
-            <p>¡Reserva tu turno para el clásico juego del sapito! 🎯🐸 Desafía a tus amigos, lanza las monedas y suma puntos en esta divertida competencia. 🪙🎉 ¡Diversión asegurada para todos! 😄</p>
+            <p>¡Reserva tu turno para el clásico juego del sapito! 🪙 Lanza las monedas y suma puntos en esta divertida competencia. 🎉</p>
             <button onclick="loadIframe('Sapito')">Reservar</button>
         </div>
-    </div>
+    </main>
 
-    <div id="iframe-container">
-        <!-- Aquí se cargará el iframe según la selección -->
+    <div id="iframe-container" role="region" aria-live="polite">
+        <!-- Cargará el iframe según la selección -->
     </div>
 
     <!-- Mensaje flotante de cargando -->
-    <div id="loading-message">Cargando...</div>
+    <div id="loading-message" role="alert">Cargando...</div>
 
     <script>
         function loadIframe(game) {
