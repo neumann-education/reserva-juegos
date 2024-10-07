@@ -211,6 +211,19 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        window.onload = function() {
+            Swal.fire({
+                title: 'Bienvenidos a reserva de juegos recreativos',
+                text: 'Para confirmar su reserva, por favor acérquese a la Garita de Vigilancia con su DNI para la recepción de los implementos. Es necesario presentar la captura de pantalla de la reserva o el correo de confirmación que recibió tras realizar la misma.',
+                icon: 'info',
+                confirmButtonText: 'Aceptar',
+                backdrop: 'rgba(0,0,0,0.6)',
+                background: '#fefefe',
+                confirmButtonColor: '#673AB6',
+                color: '#333'
+            });
+        };
+
         function loadIframe(game) {
             let iframeContainer = document.getElementById('iframe-container');
             let loadingMessage = document.getElementById('loading-message');
