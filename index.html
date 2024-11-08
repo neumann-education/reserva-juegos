@@ -184,7 +184,7 @@
 
         <div class="game-card" role="button" tabindex="0" aria-label="Reservar Taka Taka" onclick="loadIframe('Taka')" onkeypress="if(event.key === 'Enter') loadIframe('Taka')">
             <img src="https://www.juegosmartinakids.cl/imagenes/juegos/imagen-ID-06066474.jpg" alt="Taka Taka">
-            <h2>⚽️🕹️ Taka Taka (no disponible)</h2>
+            <h2>⚽️🕹️ Taka Taka (Disponible)</h2>
             <p>¡Reserva tu turno para el emocionante juego del taka taka! 🎯 Desafía a tus amigos en este clásico de fútbol de mesa. 🥳</p>
             <button onclick="loadIframe('Taka')">Reservar</button>
         </div>
@@ -230,7 +230,7 @@
 
             // Hacer visible el contenedor del iframe
             iframeContainer.style.display = 'block';
-
+/*
             if (game === 'Taka') {
                 // Mostrar un mensaje de alerta para el juego Taka Taka
                 Swal.fire({
@@ -240,7 +240,7 @@
                     confirmButtonText: 'Aceptar'
                 });
                 return; // No cargamos el iframe
-            }
+            }*/
 
             // Mostrar mensaje de cargando
             loadingMessage.style.display = 'block';
@@ -257,6 +257,9 @@
                 case 'Sapito':
                     iframeSrc = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3IUjsFB9k3JRs9PC5cQlby9e2AG1wYU_Hlfcvk2AV8s2RQ_0IZcbhco0p0khBgpPmqqyC1jPQ0?gv=true';
                     break;
+                 case 'Taka': // Aquí hacemos que Taka Taka esté disponible
+                iframeSrc = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1iySGhwvFWIkYX-Lmgof7rz_kVlKp7te7XNsj6pDoWspuI5M4Hju2Iq99zjj4GOaLkQoZWjvJI';
+                break;
             }
 
             // Cargar el iframe
